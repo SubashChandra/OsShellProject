@@ -1,21 +1,42 @@
 #include "headers.h"
 
-
+#define HISTSIZE 100
 //global variables
 char promptString[1000];
-queue<string> hist[100]; //local history bffer
+vector<string> hist[HISTSIZE]; //local history bffer
 int curIndex=0; //curIndex for the histBuffer
+int startIndex=0;
+int count=0;
+
 
 void addToHist(char str[])
 {
 	char temp[1000];
 	sprintf(temp,"%s\n",str);
 	//printf("###%s",temp); 
-	
+
 	strcpy(hist[curIndex],temp);
-	
+
+	if(count==HISTSIZE) //if the history is already full
+	{
+		//we should insert current commands but start ignoring first commands
+		startIndex++;
+	}
+
+	//for the first 100 insertions 
+	if(count<HISTSIZE)
+		count++;
+
+	curIndex++;
+	//check if the curIndex jas reached end
+	if(curIndex==100) 
+		curIndex=0; //reset it
 
 
+	FILE *fp=fopen("History.txt","w");
+	if(startIndex
+
+	fclose(fp);
 }
 
 	
