@@ -10,9 +10,9 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
-	char str[1000],temp[1000];
+/*	char str[1000],temp[1000];
 	scanf("%[^\n]",str);
 	getchar();
 	strcpy(temp,str);
@@ -56,7 +56,17 @@ int main()
 	{
 		cout<<v[i];
 	}
+*/
+	printf("%s\n",argv[1]);
+	FILE *f1 = fopen(argv[1],"r");
 
+	char buf[1000];
+	char c;
+	while((c=fgetc(f1))!=EOF)
+	{
+		printf("%c",c);
+	}
+	fclose(f1);
 	return 0;
 }
 

@@ -10,6 +10,7 @@
 #include<vector>
 #include<string>
 #include<fcntl.h>
+#include<sys/wait.h>
 
 //handling signals
 #include<signal.h>
@@ -39,3 +40,4 @@ vector<Cmdnodeptr> parseStr(char str[], char *dltr);
 void execCommand(char str[]);
 void execCd(char str[]);
 void execPwd();
+

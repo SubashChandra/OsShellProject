@@ -1,39 +1,68 @@
 #include "headers.h"
 
-
+#define SIZE 100
 //global variables
 char promptString[1000];
-queue<string> hist[100]; //local history bffer
+char hist[SIZE][1002]; //local history bffer
 int curIndex=0; //curIndex for the histBuffer
+int startIndex=0; //startIndex for the histBuffer
+int capacity=SIZE; //capacity of histBuffer
+int curSize=0; //size of histBuffer at any time; 0 to start with
 
 void addToHist(char str[])
 {
 	char temp[1000];
-	sprintf(temp,"%s\n",str);
+	sprintf(temp,"%s",str);
 	//printf("###%s",temp); 
 	
-	strcpy(hist[curIndex],temp);
-	
 
+	//if history is filled to full, increment startIndex as well to make room as well as ignore the oldest command
+	if(curSize+1==capacity)
+	{
+		startIndex=(startIndex+1)%capacity;
+		strcpy(hist[curIndex],temp);
+		curIndex=(curIndex+1)%capacity;
+	}
 
+	else if(curSize+1<capacity) //if not full
+	{
+		strcpy(hist[curIndex],temp); //jst copy to curentIndex nd increment it
+		curIndex=(curIndex+1)%capacity;
+		curSize++;
+	}
+
+	///now that copy is done, open the file and write the whole histBuffer to file
+	FILE *f1 = fopen("history.txt","w");
+	int i=0,j=startIndex;
+	while(i<curSize)
+	{
+		fprintf(f1,"%s\n",hist[j]);
+		j=(j+1)%capacity;
+		i++;
+	}
+	fclose(f1);
 }
+
 
 	
 
 
 int main()
 {
-	//do a infinite loop of command prompt
+	//restore history if there is any
+//	restoreHistory();
+	
 	char str[10000],temp[10000];	
+	//do a infinite loop of command prompt
 	getcwd(promptString,1000);
-	printf("%s# ",promptString);
+	printf("%s### ",promptString);
 	while(1)
 	{
 		scanf("%[^\n]",str);
+		getchar();
 		//everytime add current command to localbuffer 
 		//nd add to the history file
 		addToHist(str);
-		getchar();
 		strcpy(temp,str);
 		char *token;
 		token=strtok(temp," ");
@@ -59,6 +88,7 @@ int main()
 		//implement local history
 		else if(!strcmp(str,"history"))
 		{
+			printf("history command in progress\n");
 
 				
 		}
@@ -89,7 +119,7 @@ int main()
 		memset(&str[0],0,strlen(str));
 	
 		getcwd(promptString,1000);
-		printf("%s# ",promptString);
+		printf("%s### ",promptString);
 
 	}
 	return 0;
