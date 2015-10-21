@@ -10,6 +10,8 @@ int capacity=SIZE; //capacity of histBuffer
 int curSize=0; //size of histBuffer at any time; 0 to start with
 
 
+
+//add every command entered in shell to histBuffer and write taht to history.txt
 void addToHist(char str[])
 {
 	char temp[1000];
@@ -31,7 +33,48 @@ void addToHist(char str[])
 		curIndex=(curIndex+1)%capacity;
 		curSize++;
 	}
+}
 
+
+
+//restore history ie read history.txt to local hist buffer
+void restoreHistory()
+{
+	int c;
+	char temp[1000];
+	FILE *f1 = fopen("history.txt","r");
+
+	printf("***********restoring**********\n");
+	if(f1!=NULL)
+	{
+		int i=0;
+		while((c=fgetc(f1))!=EOF)
+		{
+			if(c=='\n')
+			{
+				printf("%s**",temp);
+				addToHist(temp);
+				i=0;
+				memset(&temp[0],0,sizeof(temp));
+				continue;
+			}
+			temp[i]=c;
+			i++;
+		}
+		fclose(f1);
+	}
+	else
+	{
+		printf("no file\n");
+		return;
+	}
+}
+
+
+
+//print the local buffer to history file
+void printToFile()
+{
 	///now that copy is done, open the file and write the whole histBuffer to file
 	FILE *f1 = fopen("history.txt","w");
 	int i=0,j=startIndex;
@@ -46,13 +89,10 @@ void addToHist(char str[])
 }
 
 
-	
-
-
 int main()
 {
 	//restore history if there is any
-//	restoreHistory();
+	restoreHistory();
 	
 	char str[10000],temp[10000];	
 	//do a infinite loop of command prompt
@@ -62,13 +102,18 @@ int main()
 	{
 		scanf("%[^\n]",str);
 		getchar();
+		
 		//everytime add current command to localbuffer 
-		//nd add to the history file
+		//nd print to the history file
 		addToHist(str);
+		printToFile();
+		
+		
 		strcpy(temp,str);
 		char *token;
 		token=strtok(temp," ");
 		//if has pipe handle it
+		
 		if(hasPipe(str))
 		{
 			int n=pipeCount(str);
@@ -91,8 +136,6 @@ int main()
 		else if(!strcmp(str,"history"))
 		{
 			printf("history command in progress\n");
-
-				
 		}
 		//if any of the builtins
 		else if((strcmp(token,"cd")==0) || (strcmp(token,"pwd")==0) || (strcmp(token,"export")==0))

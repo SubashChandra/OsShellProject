@@ -1,5 +1,4 @@
-ls 
-pwd
 ls -l
 cat history.txt
+clear
 exit
