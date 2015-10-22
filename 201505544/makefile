@@ -1,3 +1,3 @@
-shellmake: main.cpp pipeFuncs.cpp parser.cpp auxillaryFuncs.cpp
-	g++ -o shellmake main.cpp pipeFuncs.cpp parser.cpp auxillaryFuncs.cpp
+shellmake: main.cpp parser.cpp pipeFuncs.cpp auxillaryFuncs.cpp history.cpp
+	g++ -o shellmake main.cpp parser.cpp pipeFuncs.cpp auxillaryFuncs.cpp history.cpp
 

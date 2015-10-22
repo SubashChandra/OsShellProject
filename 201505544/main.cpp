@@ -1,92 +1,9 @@
 #include "headers.h"
 
-#define SIZE 100
+
 //global variables
 char promptString[1000];
-char hist[SIZE][1002]; //local history bffer
-int curIndex=0; //curIndex for the histBuffer
-int startIndex=0; //startIndex for the histBuffer
-int capacity=SIZE; //capacity of histBuffer
-int curSize=0; //size of histBuffer at any time; 0 to start with
 
-
-
-//add every command entered in shell to histBuffer and write taht to history.txt
-void addToHist(char str[])
-{
-	char temp[1000];
-	sprintf(temp,"%s",str);
-	//printf("###%s",temp); 
-	
-
-	//if history is filled to full, increment startIndex as well to make room as well as ignore the oldest command
-	if(curSize+1==capacity)
-	{
-		startIndex=(startIndex+1)%capacity;
-		strcpy(hist[curIndex],temp);
-		curIndex=(curIndex+1)%capacity;
-	}
-
-	else if(curSize+1<capacity) //if not full
-	{
-		strcpy(hist[curIndex],temp); //jst copy to curentIndex nd increment it
-		curIndex=(curIndex+1)%capacity;
-		curSize++;
-	}
-}
-
-
-
-//restore history ie read history.txt to local hist buffer
-void restoreHistory()
-{
-	int c;
-	char temp[1000];
-	FILE *f1 = fopen("history.txt","r");
-
-	printf("***********restoring**********\n");
-	if(f1!=NULL)
-	{
-		int i=0;
-		while((c=fgetc(f1))!=EOF)
-		{
-			if(c=='\n')
-			{
-				printf("%s**",temp);
-				addToHist(temp);
-				i=0;
-				memset(&temp[0],0,sizeof(temp));
-				continue;
-			}
-			temp[i]=c;
-			i++;
-		}
-		fclose(f1);
-	}
-	else
-	{
-		printf("no file\n");
-		return;
-	}
-}
-
-
-
-//print the local buffer to history file
-void printToFile()
-{
-	///now that copy is done, open the file and write the whole histBuffer to file
-	FILE *f1 = fopen("history.txt","w");
-	int i=0,j=startIndex;
-	while(i<curSize)
-	{
-		fprintf(f1,"%s\n",hist[j]);
-		j=(j+1)%capacity;
-		i++;
-	}
-	fclose(f1);
-
-}
 
 
 int main()
@@ -133,10 +50,12 @@ int main()
 		}
 
 		//implement local history
-		else if(!strcmp(str,"history"))
+		else if(strcmp(token,"history")==0)
 		{
-			printf("history command in progress\n");
+			execHistory(str);
 		}
+		
+		
 		//if any of the builtins
 		else if((strcmp(token,"cd")==0) || (strcmp(token,"pwd")==0) || (strcmp(token,"export")==0))
 		{
@@ -150,7 +69,7 @@ int main()
 			}
 			if(strcmp(token,"export")==0)
 			{
-				printf("export here\n");
+				execExport(str);
 			}
 			
 		}

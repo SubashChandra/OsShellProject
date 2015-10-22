@@ -40,4 +40,23 @@ vector<Cmdnodeptr> parseStr(char str[], char *dltr);
 void execCommand(char str[]);
 void execCd(char str[]);
 void execPwd();
+void execExport(char str[]);
 
+//history.cpp
+//vars
+
+#define SIZE 100
+extern char hist[SIZE][1002]; //local history bffer
+extern int curIndex; //curIndex for the histBuffer
+extern int startIndex; //startIndex for the histBuffer
+extern int capacity; //capacity of histBuffer
+extern int curSize; //size of histBuffer at any time; 0 to start with
+
+
+
+void addToHist(char str[]);
+void restoreHistory();
+void printToFile();
+void printAll();
+void printCount(int n);
+void execHistory(char str[]);

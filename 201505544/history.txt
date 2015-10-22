@@ -1,4 +1,27 @@
+ls
+ls --l
+ls -A
+pwd
+history
+history 3
+history
 ls -l
-cat history.txt
-clear
+history 100
+history 2
+history 99
+history 99
+ls -lR
+history 98
+ls -l
+history
+hsitory 6
+exitr
+exit
+history 100
+history 1
+history 3
+history -1
+exirt
+exit
+ls -l
 exit

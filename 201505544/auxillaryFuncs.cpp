@@ -1,6 +1,20 @@
 //for auxillary functions that can be implemented using execvp 
 // and shell built in's
 #include "headers.h"
+void execExport(char str[])
+{
+	char name[50];
+	char val[50];
+
+	char *token;
+	token=strtok(str," "); //take off history string from str
+	token=strtok(NULL,"=");
+	strcpy(name,token); //get name of var
+	token=strtok(NULL,"=");
+	strcpy(val,token); //get val of var
+	
+	setenv(name,val,1);
+}
 
 
 void execPwd()

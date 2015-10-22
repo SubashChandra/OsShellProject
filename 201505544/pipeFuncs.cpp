@@ -1,6 +1,5 @@
 #include "headers.h"
 
-
 //includes multtlevel pipe exec func nad otehr auxilary func
 
 int hasPipe(char str[])
