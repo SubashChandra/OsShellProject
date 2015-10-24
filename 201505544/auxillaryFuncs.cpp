@@ -12,8 +12,9 @@ void execExport(char str[])
 	strcpy(name,token); //get name of var
 	token=strtok(NULL,"=");
 	strcpy(val,token); //get val of var
-	
-	setenv(name,val,1);
+	//printf("%s %s check\n",name,val);	
+	int ans=setenv(name,val,1);
+	//printf("status: %d\n",ans);
 }
 
 
@@ -59,7 +60,11 @@ void execCommand(char str[])
 			j++;
 		}
 		c1[j]=NULL;
-		execvp(c1[0],c1);
+		int eno=execvp(c1[0],c1);
+		if(eno==-1)
+		{
+			printf("error: invalid command\n");
+		}
 	}
 	else
 		wait(NULL);

@@ -2,7 +2,7 @@
 #include "headers.h"
 
 
-vector<Cmdnodeptr> parseStr(char str[], char *dltr)
+vector<Cmdnodeptr> parseStr(char str[], char dltr[])
 {
 	vector<Cmdnodeptr>v;
 	Cmdnodeptr temp;

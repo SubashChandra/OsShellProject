@@ -34,7 +34,7 @@ void executePipe(vector<Cmdnodeptr> v, int n);
 
 //parser.cpp
 
-vector<Cmdnodeptr> parseStr(char str[], char *dltr);
+vector<Cmdnodeptr> parseStr(char str[], char dltr[]);
 
 //auxillaryFuncs.cpp
 void execCommand(char str[]);
@@ -43,8 +43,8 @@ void execPwd();
 void execExport(char str[]);
 
 //history.cpp
-//vars
 
+//vars
 #define SIZE 100
 extern char hist[SIZE][1002]; //local history bffer
 extern int curIndex; //curIndex for the histBuffer
@@ -53,7 +53,7 @@ extern int capacity; //capacity of histBuffer
 extern int curSize; //size of histBuffer at any time; 0 to start with
 
 
-
+//functions
 void addToHist(char str[]);
 void restoreHistory();
 void printToFile();

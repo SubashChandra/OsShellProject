@@ -1,27 +1,14 @@
-ls
-ls --l
-ls -A
-pwd
-history
-history 3
-history
-ls -l
-history 100
-history 2
-history 99
-history 99
-ls -lR
-history 98
-ls -l
-history
-hsitory 6
-exitr
-exit
-history 100
-history 1
-history 3
-history -1
-exirt
-exit
-ls -l
-exit
+  1 ls -Rl
+  2 ls -R /
+  3 exit
+  4 history
+  5 ls
+  6 cleAR
+  7 exit
+  8 history
+  9 ls
+ 10 history
+ 11 ls -l
+ 12 exit
+ 13 lks
+ 14 exit

@@ -48,16 +48,20 @@ void restoreHistory()
 		int i=0;
 		while((c=fgetc(f1))!=EOF)
 		{
+			temp[i]=c;
+			i++;
 			if(c=='\n')
 			{
-				printf("%s**\n",temp);
-				addToHist(temp);
+				//printf("%s**\n",temp);
+				//addToHist(temp);
+				char *token=strtok(temp," ");
+				token=strtok(NULL,"\n");
+				//printf("%s***\n",token);
+				addToHist(token);
 				i=0;
 				memset(&temp[0],0,sizeof(temp));
 				continue;
 			}
-			temp[i]=c;
-			i++;
 		}
 		fclose(f1);
 	}
@@ -76,10 +80,12 @@ void printToFile()
 	///now that copy is done, open the file and write the whole histBuffer to file
 	FILE *f1 = fopen("history.txt","w");
 	int i=0,j=startIndex;
+	int counter=1;
 	while(i<curSize)
 	{
-		fprintf(f1,"%s\n",hist[j]);
+		fprintf(f1,"%3d %s\n",counter,hist[j]);
 		j=(j+1)%capacity;
+		counter++;
 		i++;
 	}
 	fclose(f1);
@@ -90,11 +96,13 @@ void printToFile()
 void printAll()
 {
 	int i;
-	int index=startIndex;;
+	int index=startIndex;
+	int counter=1;
 	for(i=0;i<curSize;i++)
 	{
-		printf("%s\n",hist[index]);
+		printf("%3d %s\n",counter,hist[index]);
 		index=(index+1)%capacity;
+		counter++;
 	}
 }
 
@@ -114,11 +122,14 @@ void printCount(int n)
 		while(index<0)
 			index+=capacity;
 		int i=0;
+		int counter=curSize-n+1;
+		//printf("****check %d\n",counter);
 		while(i<n)
 		{
-			printf("%s\n",hist[index]);
+			printf("%3d %s\n",counter,hist[index]);
 			i++;
 			index=(index+1)%capacity;
+			counter++;
 		}
 	}
 }
