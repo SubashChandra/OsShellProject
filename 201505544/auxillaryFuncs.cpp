@@ -28,6 +28,20 @@ void execExport(char str[])
 {
 	char name[50];
 	char val[50];
+	int i=0;
+	int flag=0;
+	while(i<strlen(str))
+	{
+		if(str[i]=='=')
+			flag=1;
+		i++;
+	}
+
+	if(flag==0)
+	{
+		printf("error: invalid command\n");
+		return;
+	}
 
 	char *token;
 	token=strtok(str," "); //take off history string from str

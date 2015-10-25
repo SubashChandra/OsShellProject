@@ -54,24 +54,55 @@ void executePipe(vector<Cmdnodeptr> v, int n)
 				close(fd[0]);
 
 				wait(&status[i]);
-				char **c1;
-				c1=(char**)malloc(sizeof(char*)*10);
-				int j;
-				for(j=0;j<10;j++)
-				{
-					c1[j]=(char*)malloc(sizeof(char)*100);
-				}
+
+				//now check if the command belongs to history or echo
+				char temp[10000];
+				strcpy(temp,v[n-i-1]->str);
+				
 				char *token;
-				token=strtok(v[n-i-1]->str," ");
-				j=0;
-				while(token)
-				{	
-					c1[j]=token;
-					token=strtok(NULL," ");
-					j++;
+				token=strtok(temp," ");
+			
+				//invoke echo execution
+				if(strcpy(token,"echo")==0)
+				{
+					printf("check1\n");
+					execEcho(v[n-i-1]->str);
 				}
-				c1[j]=NULL;
-				execvp(c1[0],c1);
+
+
+				//invoke history execution
+				else if(strcpy(token,"history")==0)
+				{
+					printf("check\n");
+					execHistory(v[n-i-1]->str);
+
+					printf("check\n");
+				}
+
+
+
+				else //if its neither history nor echo then execute locally
+				{
+
+					char **c1;
+					c1=(char**)malloc(sizeof(char*)*10);
+					int j;
+					for(j=0;j<10;j++)
+					{
+						c1[j]=(char*)malloc(sizeof(char)*100);
+					}
+					char *token;
+					token=strtok(v[n-i-1]->str," ");
+					j=0;
+					while(token)
+					{	
+						c1[j]=token;
+						token=strtok(NULL," ");
+						j++;
+					}
+					c1[j]=NULL;
+					execvp(c1[0],c1);
+				}
 
 			}
 			else // Child 

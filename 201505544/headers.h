@@ -64,4 +64,5 @@ void execHistory(char str[]);
 
 //echo.cpp
 void execEcho(char str[]);
+void runEcho(char str[]);
 void replaceEnv(char str[],char temp[]);

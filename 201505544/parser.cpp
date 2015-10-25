@@ -19,8 +19,8 @@ vector<Cmdnodeptr> parseStr(char str[], char dltr[])
 	}
 	
 	int i;
-	for(i=0;i<v.size();i++)
-		printf("%s\n",v[i]->str);
+	//for(i=0;i<v.size();i++)
+	//	printf("%s\n",v[i]->str);
 	return v;
 }
 

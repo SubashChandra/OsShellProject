@@ -1,0 +1,100 @@
+  1 exit
+  2 echo aple
+  3 export FRUIT="fruit"
+  4 echo apple is a gd $FRUIT nd tasty
+  5 exit
+  6 export a="apppple"
+  7 exit
+  8 exportceqavs
+  9 exit
+ 10 echo $a
+ 11 echo $a
+ 12 export a="apple"
+ 13 echo $a
+ 14 echo $b
+ 15 exit
+ 16 export $b=444
+ 17 echo $b
+ 18 echo $$b
+ 19 echo $a
+ 20 echo $c
+ 21 echo $USER
+ 22 echo $USER is a gd guy
+ 23 exit
+ 24 ls
+ 25 history
+ 26 clear
+ 27 echo $USER
+ 28 echo '$USER' "$USER"
+ 29 echo '$USER'
+ 30 exit
+ 31 echo '$USER
+ 32 echo '$USER'
+ 33 echo "$USER"
+ 34 echo $USER
+ 35 echo "$USER"
+ 36 exit
+ 37 echo $USER
+ 38 echo "$USER"
+ 39 echo '$USER'
+ 40 exit
+ 41 $USER
+ 42 exit
+ 43 echo abc 'appe is a $USER' "$USER"
+ 44 echo hello world
+ 45 x=1
+ 46 exit
+ 47 history
+ 48 exit
+ 49 history
+ 50 exit
+ 51 history
+ 52 echo "appl is gd fruit" | wc 
+ 53 echo "apple"
+ 54 echo "apple"|wc
+ 55 echo "apple"
+ 56 echo "apple" | ewc
+ 57 exit
+ 58 history
+ 59 history | wc
+ 60 history
+ 61 history|wc
+ 62 echo "happy is gd" | wc
+ 63 export a=5 | echo $a | wc
+ 64 export a="apple"
+ 65 echo $a is a fruit | wc
+ 66 echo $a is a fruit
+ 67 ls
+ 68 cat main.cpp | wc
+ 69 ls -l
+ 70 wc main.cpp
+ 71 export a='a b c d e'
+ 72 echo $a | wc
+ 73 echo $a
+ 74 wc 'a b c d e'
+ 75 exit
+ 76 ls
+ 77 history
+ 78 ls
+ 79 history
+ 80 export | wc
+ 81 export | wc
+ 82 export a=5
+ 83 echo $a
+ 84 export |wc
+ 85 export cwecv 
+ 86 a=5
+ 87 history 2 | wc
+ 88 history | wc
+ 89 echo $a | wc
+ 90 exit
+ 91 export a="apple is gd"
+ 92 echo $a
+ 93 echo $a | wc
+ 94 ext
+ 95 make
+ 96 ./sh	
+ 97 exit
+ 98 echo $USER
+ 99 echo $USER | wc
+100 exit
