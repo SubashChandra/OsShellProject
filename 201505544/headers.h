@@ -41,6 +41,7 @@ void execCommand(char str[]);
 void execCd(char str[]);
 void execPwd();
 void execExport(char str[]);
+void removeQuotes(char val[]);
 
 //history.cpp
 
@@ -52,7 +53,6 @@ extern int startIndex; //startIndex for the histBuffer
 extern int capacity; //capacity of histBuffer
 extern int curSize; //size of histBuffer at any time; 0 to start with
 
-
 //functions
 void addToHist(char str[]);
 void restoreHistory();
@@ -60,3 +60,8 @@ void printToFile();
 void printAll();
 void printCount(int n);
 void execHistory(char str[]);
+
+
+//echo.cpp
+void execEcho(char str[]);
+void replaceEnv(char str[],char temp[]);

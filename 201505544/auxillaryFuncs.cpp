@@ -1,6 +1,29 @@
 //for auxillary functions that can be implemented using execvp 
 // and shell built in's
 #include "headers.h"
+
+void removeQuotes(char val[])
+{
+	int i=0;
+	int index=0;
+	while(i<strlen(val))
+	{
+		if(val[i]==39 || val[i]=='"')
+		{
+			i++;
+		}
+		else
+		{
+			val[index]=val[i];
+			i++;
+			index++;
+		}
+	}
+	val[index]='\0';
+}
+
+
+
 void execExport(char str[])
 {
 	char name[50];
@@ -12,6 +35,7 @@ void execExport(char str[])
 	strcpy(name,token); //get name of var
 	token=strtok(NULL,"=");
 	strcpy(val,token); //get val of var
+	removeQuotes(val);
 	//printf("%s %s check\n",name,val);	
 	int ans=setenv(name,val,1);
 	//printf("status: %d\n",ans);
